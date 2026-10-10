@@ -83,6 +83,9 @@ fun ResultScreen(
 ) {
     val scrollState = rememberScrollState()
     var showTechnicalDetails by remember { mutableStateOf(false) }
+    var showUnsafeWarningDialog by remember(scanResult.id) {
+        mutableStateOf(scanResult.riskLevel != RiskLevel.SAFE)
+    }
 
     val riskColor: Color = when (scanResult.riskLevel) {
         RiskLevel.SAFE -> SafeGreen
@@ -102,6 +105,83 @@ fun ResultScreen(
         RiskLevel.SUSPICIOUS -> stringResource(R.string.risk_suspicious)
         RiskLevel.HIGH_RISK -> stringResource(R.string.risk_high_risk)
         RiskLevel.DANGEROUS -> stringResource(R.string.risk_dangerous)
+    }
+
+    if (showUnsafeWarningDialog) {
+        val dialogTitle = when (scanResult.riskLevel) {
+            RiskLevel.DANGEROUS -> "🔴 DANGEROUS WEBSITE DETECTED"
+            RiskLevel.HIGH_RISK -> "⚠ HIGH-RISK WEBSITE WARNING"
+            RiskLevel.SUSPICIOUS -> "⚡ SUSPICIOUS WEBSITE WARNING"
+            RiskLevel.SAFE -> ""
+        }
+
+        androidx.compose.material3.AlertDialog(
+            onDismissRequest = { showUnsafeWarningDialog = false },
+            title = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.Warning,
+                        contentDescription = null,
+                        tint = if (scanResult.riskLevel == RiskLevel.DANGEROUS) RiskDanger else RiskRed,
+                        modifier = Modifier.size(28.dp)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(
+                        text = dialogTitle,
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 16.sp,
+                        color = if (scanResult.riskLevel == RiskLevel.DANGEROUS) RiskDanger else RiskRed
+                    )
+                }
+            },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Surface(
+                        shape = RoundedCornerShape(10.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                    ) {
+                        Text(
+                            text = scanResult.rawContent,
+                            modifier = Modifier.padding(12.dp),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+                    Text(
+                        text = "Risk Assessment: ${scanResult.riskScore} / 100 (${scanResult.riskLevel.label})",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        color = if (scanResult.riskLevel == RiskLevel.DANGEROUS) RiskDanger else RiskRed
+                    )
+                    if (scanResult.signals.isNotEmpty()) {
+                        Text(text = "Detected Risk Signals:", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                        scanResult.signals.take(3).forEach { signal ->
+                            Text(text = "• ${signal.title}: ${signal.description}", fontSize = 12.sp, color = TextSecondary)
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "⛔ SAFETY ADVISORY: Do NOT visit this link or enter passwords, credit cards, or banking details.",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = { showUnsafeWarningDialog = false },
+                    colors = ButtonDefaults.buttonColors(containerColor = if (scanResult.riskLevel == RiskLevel.DANGEROUS) RiskDanger else RiskRed),
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+                    Text("I Understand — Review Analysis", fontWeight = FontWeight.Bold, color = Color.White)
+                }
+            },
+            containerColor = MaterialTheme.colorScheme.surface,
+            shape = RoundedCornerShape(18.dp)
+        )
     }
 
     Column(

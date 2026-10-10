@@ -6,6 +6,7 @@
     <string name="nav_home">होम</string>
     <string name="nav_scan">स्कैन</string>
     <string name="nav_history">इतिहास</string>
+    <string name="nav_awareness">जागरूकता</string>
     <string name="nav_privacy">गोपनीयता</string>
 
     <!-- Home Dashboard -->

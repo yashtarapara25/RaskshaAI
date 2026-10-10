@@ -19,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material3.Card
@@ -55,6 +56,7 @@ enum class NavDestination(val labelRes: Int, val icon: ImageVector) {
     HOME(R.string.nav_home, Icons.Default.Home),
     SCAN(R.string.nav_scan, Icons.Default.QrCodeScanner),
     HISTORY(R.string.nav_history, Icons.Default.History),
+    AWARENESS(R.string.nav_awareness, Icons.Default.Info),
     PRIVACY(R.string.nav_privacy, Icons.Default.Lock)
 }
 

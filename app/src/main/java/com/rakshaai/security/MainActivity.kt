@@ -26,6 +26,7 @@ import com.rakshaai.security.data.preference.LanguageManager
 import com.rakshaai.security.data.repository.ScanRepository
 import com.rakshaai.security.domain.engine.LocalDetectionEngine
 import com.rakshaai.security.ui.analysis.AnalysisScreen
+import com.rakshaai.security.ui.awareness.CyberAwarenessScreen
 import com.rakshaai.security.ui.components.BottomNavBar
 import com.rakshaai.security.ui.components.NavDestination
 import com.rakshaai.security.ui.dashboard.DashboardScreen
@@ -45,17 +46,23 @@ sealed class ScreenState {
     data class Analyzing(val contentType: ContentType, val text: String, val imageUri: String? = null) : ScreenState()
     data class Result(val scanResult: ScanResult) : ScreenState()
     data object History : ScreenState()
+    data object Awareness : ScreenState()
     data object Privacy : ScreenState()
 }
 
 class MainActivity : ComponentActivity() {
-    private var pendingScanId: String? = null
+    private var pendingScanId = mutableStateOf<String?>(null)
+    private var sharedScanText = mutableStateOf<String?>(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pendingScanId = intent?.getStringExtra("scan_id")
+        pendingScanId.value = intent?.getStringExtra("scan_id")
+        if (intent?.action == Intent.ACTION_SEND && intent?.type == "text/plain") {
+            sharedScanText.value = intent?.getStringExtra(Intent.EXTRA_TEXT)
+        }
 
         ScanRepository.initialize(applicationContext)
+        com.rakshaai.security.data.network.OnlineMonitoringManager.initialize(applicationContext)
 
         // Initialize ML classifier on background thread
         lifecycleScope.launch(Dispatchers.IO) {
@@ -73,14 +80,20 @@ class MainActivity : ComponentActivity() {
                 LanguageManager.getLocalizedContext(activity)
             }
 
+            val initialStartScreen = when {
+                !isLanguageSelected -> ScreenState.LanguageSelect
+                !sharedScanText.value.isNullOrBlank() -> ScreenState.Analyzing(ContentType.URL, sharedScanText.value!!)
+                else -> ScreenState.Dashboard
+            }
+
             CompositionLocalProvider(
                 LocalContext provides localizedContext,
                 LocalActivityResultRegistryOwner provides activity
             ) {
                 RakshaAITheme {
                     RakshaMainApp(
-                        initialScreen = if (isLanguageSelected) ScreenState.Dashboard else ScreenState.LanguageSelect,
-                        initialScanId = pendingScanId,
+                        initialScreen = initialStartScreen,
+                        initialScanId = pendingScanId.value,
                         onLanguageChange = { newLang ->
                             currentLang = newLang
                         }
@@ -95,7 +108,13 @@ class MainActivity : ComponentActivity() {
         setIntent(intent)
         val scanId = intent?.getStringExtra("scan_id")
         if (!scanId.isNullOrEmpty()) {
-            pendingScanId = scanId
+            pendingScanId.value = scanId
+        }
+        if (intent?.action == Intent.ACTION_SEND && intent?.type == "text/plain") {
+            val text = intent?.getStringExtra(Intent.EXTRA_TEXT)
+            if (!text.isNullOrBlank()) {
+                sharedScanText.value = text
+            }
         }
     }
 }
@@ -135,6 +154,7 @@ fun RakshaMainApp(
         is ScreenState.InputScan, is ScreenState.Analyzing -> NavDestination.SCAN
         is ScreenState.Result -> NavDestination.SCAN
         is ScreenState.History -> NavDestination.HISTORY
+        is ScreenState.Awareness -> NavDestination.AWARENESS
         is ScreenState.Privacy -> NavDestination.PRIVACY
         else -> NavDestination.HOME
     }
@@ -149,6 +169,7 @@ fun RakshaMainApp(
                         NavDestination.HOME -> ScreenState.Dashboard
                         NavDestination.SCAN -> ScreenState.InputScan()
                         NavDestination.HISTORY -> ScreenState.History
+                        NavDestination.AWARENESS -> ScreenState.Awareness
                         NavDestination.PRIVACY -> ScreenState.Privacy
                     }
                 }
@@ -213,6 +234,14 @@ fun RakshaMainApp(
                     HistoryScreen(
                         onSelectScanResult = { result ->
                             currentScreen = ScreenState.Result(result)
+                        }
+                    )
+                }
+
+                is ScreenState.Awareness -> {
+                    CyberAwarenessScreen(
+                        onNavigateToScan = {
+                            currentScreen = ScreenState.InputScan()
                         }
                     )
                 }

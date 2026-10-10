@@ -6,6 +6,7 @@
     <string name="nav_home">Home</string>
     <string name="nav_scan">Scan</string>
     <string name="nav_history">History</string>
+    <string name="nav_awareness">Awareness</string>
     <string name="nav_privacy">Privacy</string>
 
     <!-- Home Dashboard -->

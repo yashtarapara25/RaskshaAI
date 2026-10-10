@@ -22,11 +22,17 @@ object UrlFeatureExtractor {
         "phonepe" to setOf("phonepe.com"),
         "gpay" to setOf("google.com", "pay.google.com"),
         "aadhaar" to setOf("uidai.gov.in"),
-        "incometax" to setOf("incometax.gov.in", "incometaxindia.gov.in")
+        "incometax" to setOf("incometax.gov.in", "incometaxindia.gov.in"),
+        "google" to setOf("google.com", "google.co.in", "googleapis.com"),
+        "paypal" to setOf("paypal.com", "paypal.me"),
+        "netflix" to setOf("netflix.com"),
+        "amazon" to setOf("amazon.com", "amazon.in"),
+        "facebook" to setOf("facebook.com", "fb.com"),
+        "instagram" to setOf("instagram.com")
     )
 
     private val KNOWN_BRANDS = listOf(
-        "sbi", "hdfc", "icici", "axis", "kotak", "paytm", "phonepe", "gpay", "aadhaar", "incometax"
+        "sbi", "hdfc", "icici", "axis", "kotak", "paytm", "phonepe", "gpay", "aadhaar", "incometax", "google", "paypal", "netflix", "amazon", "facebook", "instagram"
     )
 
     fun extract(parsedUrl: ParsedUrl): UrlFeatures {

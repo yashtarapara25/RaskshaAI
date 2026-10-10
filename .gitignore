@@ -15,5 +15,6 @@
 local.properties
 datasets/
 *.zip
+*.apk
 .kotlin/
 app/src/main/assets/threat_intel/phishing_urls.txt

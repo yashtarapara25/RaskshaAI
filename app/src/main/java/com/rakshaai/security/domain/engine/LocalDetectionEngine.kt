@@ -64,13 +64,15 @@ object LocalDetectionEngine {
 
         // WORKFLOW B: DIRECT URL SCANNING (DO NOT RUN MESSAGE SVM!)
         if (type == ContentType.URL) {
-            val urlRes = UrlAnalyzer.analyze(cleanInput)
+            val isOnline = com.rakshaai.security.data.network.NetworkConnectivityObserver.isOnline.value &&
+                    com.rakshaai.security.data.preference.SecurityPreferencesRepository.settingsState.value.websiteMonitoringEnabled
+            val urlRes = UrlAnalyzer.analyzeAsync(cleanInput, isOnline)
             val signalsList = urlRes.signals.map { RiskSignal("URL Feature", it) }
             val actionsList = when (urlRes.riskLevel) {
                 RiskLevel.SAFE -> listOf("Safe to proceed, but remain cautious.")
                 RiskLevel.SUSPICIOUS -> listOf("Verify the sender/website before taking action.")
                 RiskLevel.HIGH_RISK -> listOf("Do not enter passwords or financial information on this website.")
-                RiskLevel.DANGEROUS -> listOf("Do not visit this URL. It matches known phishing indicators.")
+                RiskLevel.DANGEROUS -> listOf("Do not visit this URL. It matches known phishing/malware indicators.")
             }
 
             return@withContext ScanResult(
@@ -121,8 +123,10 @@ object LocalDetectionEngine {
         // 2. Extract Embedded URLs
         val extractedUrls = OcrUrlExtractor.extractUrls(cleanInput)
         val urlAnalysisResults = mutableListOf<UrlAnalysisResult>()
+        val isOnlineForUrls = com.rakshaai.security.data.network.NetworkConnectivityObserver.isOnline.value &&
+                com.rakshaai.security.data.preference.SecurityPreferencesRepository.settingsState.value.websiteMonitoringEnabled
         for (extractedUrl in extractedUrls) {
-            val res = UrlAnalyzer.analyze(extractedUrl)
+            val res = UrlAnalyzer.analyzeAsync(extractedUrl, isOnlineForUrls)
             urlAnalysisResults.add(res)
         }
 
@@ -145,21 +149,26 @@ object LocalDetectionEngine {
             warningSignsList.add("Prize or lottery bait")
         }
 
-        // 4. Bank / KYC / Account Suspension Threat
-        val bankMatches = listOf("sbi", "hdfc", "icici", "pan card", "kyc", "bank account", "yono", "bank", "બેંક", "ખાતું", "बैंक").filter { lowerInput.contains(it) }
-        val accountThreatMatches = listOf("blocked", "block", "suspend", "suspended", "freeze", "deactivated", "बंद").filter { lowerInput.contains(it) }
+        // 4. Bank / Account Suspension / KYC / Service Threat
+        val bankMatches = listOf("sbi", "hdfc", "icici", "pan card", "kyc", "bank account", "yono", "bank", "બેંક", "ખાતું", "बैंक", "account", "profile", "card", "sim", "jio", "airtel", "vi", "paytm").filter { lowerInput.contains(it) }
+        val accountThreatMatches = listOf("blocked", "block", "suspend", "suspended", "freeze", "deactivated", "बंद", "verify", "verification", "update", "verify your details", "urgent").filter { lowerInput.contains(it) }
 
         if (bankMatches.isNotEmpty() && accountThreatMatches.isNotEmpty()) {
             score += 40
-            signalsMap["Creates urgency by threatening account suspension"] = "Threatens immediate bank account blocking or deactivation."
-            signalsMap["Requests KYC/account verification"] = "Demands urgent KYC update or credential verification."
+            signalsMap["Creates urgency by threatening account suspension"] = "Threatens immediate account blocking, suspension, or service deactivation."
+            signalsMap["Requests credential or detail verification"] = "Demands urgent account verification or details update via unverified link."
             highlightedPhrases.addAll(bankMatches + accountThreatMatches)
             warningSignsList.add("Account threat")
-            warningSignsList.add("KYC verification request")
+            warningSignsList.add("Verification request")
         } else if (bankMatches.isNotEmpty()) {
             score += 20
-            signalsMap["Requests KYC/account verification"] = "References official bank, KYC, or account details."
+            signalsMap["Requests account verification"] = "References official account, bank, KYC, or card details."
             highlightedPhrases.addAll(bankMatches)
+        } else if (accountThreatMatches.size >= 2) {
+            score += 30
+            signalsMap["Urgent Account Action Demanded"] = "Uses coercive language demanding account verification or immediate action."
+            highlightedPhrases.addAll(accountThreatMatches)
+            warningSignsList.add("Account threat")
         }
 
         // 5. Utility / Electricity Disconnection Threat
@@ -202,10 +211,11 @@ object LocalDetectionEngine {
             warningSignsList.add("Urgency pressure")
         }
 
-        // 9. Unverified Link / Shortener in Lure Message
-        if (urlAnalysisResults.isNotEmpty() && (prizeMatches.isNotEmpty() || bankMatches.isNotEmpty() || jobMatches.isNotEmpty())) {
-            score += 15
-            signalsMap["Unverified Link in Lure Message"] = "Message combines a scam lure with an external unverified web link."
+        // 9. Unverified Link / Action Request in Lure Message
+        val hasLinkInText = lowerInput.contains("link") || lowerInput.contains("http") || lowerInput.contains("www") || urlAnalysisResults.isNotEmpty()
+        if (hasLinkInText && (prizeMatches.isNotEmpty() || bankMatches.isNotEmpty() || jobMatches.isNotEmpty() || accountThreatMatches.isNotEmpty())) {
+            score += 20
+            signalsMap["Unverified Link / Verification Action Request"] = "Message combines an account threat or scam lure with an external web link or credential verification request."
             warningSignsList.add("Unverified link in lure")
         }
 

@@ -20,12 +20,14 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Android
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.Message
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -242,11 +244,13 @@ fun HistoryRowItem(
     scanResult: ScanResult,
     onClick: () -> Unit
 ) {
-    val icon: ImageVector = when (scanResult.contentType) {
-        ContentType.MESSAGE -> Icons.Default.Message
-        ContentType.URL -> Icons.Default.Link
-        ContentType.SCREENSHOT -> Icons.Default.Image
-        ContentType.PHOTO -> Icons.Default.CameraAlt
+    val icon: ImageVector = when {
+        scanResult.rawContent.contains("APK", ignoreCase = true) || scanResult.rawContent.contains("App Installed", ignoreCase = true) -> Icons.Default.Android
+        scanResult.isNotification -> Icons.Default.Notifications
+        scanResult.contentType == ContentType.MESSAGE -> Icons.Default.Message
+        scanResult.contentType == ContentType.URL -> Icons.Default.Link
+        scanResult.contentType == ContentType.SCREENSHOT -> Icons.Default.Image
+        else -> Icons.Default.CameraAlt
     }
 
     Card(
@@ -303,8 +307,8 @@ fun HistoryRowItem(
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                val typeLabel = if (scanResult.isNotification) "🛡 Notification Protection" else scanResult.contentType.displayName
-                val displayContent = if (scanResult.isNotification) "Notification content analyzed privately" else scanResult.rawContent
+                val typeLabel = if (scanResult.isNotification) "Notification Scan" else scanResult.contentType.displayName
+                val displayContent = scanResult.rawContent
 
                 Text(
                     text = "$typeLabel • $displayContent",

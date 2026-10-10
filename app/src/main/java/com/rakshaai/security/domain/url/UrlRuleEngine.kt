@@ -15,16 +15,17 @@ object UrlRuleEngine {
 
         // 1. Threat Intelligence Matching
         if (threatIntel.isMatched) {
+            val providerTag = if (threatIntel.detailMessage.contains("URLhaus", ignoreCase = true)) "URLhaus" else "PhishTank"
             when (threatIntel.matchLevel) {
                 ThreatMatchLevel.EXACT_URL_MATCH -> {
                     score += 60
-                    signals.add("Matched known phishing URL in local PhishTank database.")
-                    warningTags.add("PhishTank Match")
+                    signals.add("Matched known active threat URL in $providerTag database.")
+                    warningTags.add("$providerTag Match")
                 }
                 ThreatMatchLevel.HOSTNAME_MATCH -> {
                     score += 50
-                    signals.add("Host domain '${threatIntel.matchedItem}' matched known phishing domain in local PhishTank database.")
-                    warningTags.add("PhishTank Domain Match")
+                    signals.add("Host domain '${threatIntel.matchedItem}' matched known threat domain in $providerTag database.")
+                    warningTags.add("$providerTag Domain Match")
                 }
                 ThreatMatchLevel.NO_MATCH -> {}
             }
@@ -121,7 +122,7 @@ object UrlRuleEngine {
         }
 
         val explanation = when {
-            threatIntel.isMatched -> "Flagged by PhishTank offline threat-intelligence database."
+            threatIntel.isMatched -> threatIntel.detailMessage
             features.brandImpersonated != null -> "Domain structure indicates potential brand impersonation."
             features.isIpAddress || features.hasUserInfo -> "URL contains high-risk technical features (IP/credentials)."
             finalScore >= 30 -> "URL exhibits multiple warning indicators (shortener, TLD, deep subdomains)."
