@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">RakshaAI</string>
+    <string name="app_tagline">Privacy-first cyber safety</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_scan">Scan</string>
+    <string name="nav_history">History</string>
+    <string name="nav_privacy">Privacy</string>
+
+    <!-- Home Dashboard -->
+    <string name="dashboard_hero_title">Check before you click</string>
+    <string name="dashboard_hero_subtitle">Scan suspicious messages, links and images privately on your device.</string>
+    <string name="dashboard_action_header">WHAT DO YOU WANT TO CHECK?</string>
+    <string name="option_message_title">Message</string>
+    <string name="option_message_desc">Scan suspicious text</string>
+    <string name="option_link_title">Link</string>
+    <string name="option_link_desc">Check a suspicious link</string>
+    <string name="option_screenshot_title">Screenshot</string>
+    <string name="option_screenshot_desc">Analyze screenshot text</string>
+    <string name="option_voice_title">Voice / Photo</string>
+    <string name="option_voice_desc">Check text from a photo or voice</string>
+
+    <!-- Offline Status -->
+    <string name="offline_badge">Offline protection active</string>
+    <string name="offline_mode_title">OFFLINE MODE</string>
+    <string name="offline_check_1">Local analysis active</string>
+    <string name="offline_check_2">No content uploaded</string>
+    <string name="offline_check_3">Internet not required</string>
+
+    <!-- Scan Screen -->
+    <string name="scan_title">Scan content</string>
+    <string name="scan_subtitle">Choose what you want to check.</string>
+    <string name="scan_tab_message">Message</string>
+    <string name="scan_tab_link">Link</string>
+    <string name="scan_tab_screenshot">Screenshot</string>
+    <string name="scan_tab_voice">Voice/Photo</string>
+    <string name="scan_placeholder_message">Paste the SMS or WhatsApp message here</string>
+    <string name="scan_placeholder_link">https://example.com</string>
+    <string name="scan_placeholder_screenshot">Extracted screenshot text will appear here...</string>
+    <string name="scan_placeholder_photo">Extracted photo text will appear here...</string>
+    <string name="btn_paste">Paste</string>
+    <string name="btn_clear">Clear</string>
+    <string name="btn_choose_screenshot">Choose Screenshot</string>
+    <string name="btn_take_photo">Take Photo</string>
+    <string name="btn_analyze_offline">Check Message</string>
+
+    <!-- Result Screen Section Headers -->
+    <string name="result_title">Risk Result</string>
+    <string name="section_risk_status">RISK STATUS</string>
+    <string name="section_what_we_found">WHAT WE FOUND</string>
+    <string name="section_why_is_this_risky">WHY IS THIS RISKY?</string>
+    <string name="section_warning_signs">WARNING SIGNS</string>
+    <string name="section_what_should_you_do">WHAT SHOULD YOU DO?</string>
+    <string name="section_how_to_avoid_this">HOW TO AVOID THIS</string>
+
+    <!-- Risk Levels -->
+    <string name="risk_safe">SAFE</string>
+    <string name="risk_suspicious">SUSPICIOUS</string>
+    <string name="risk_high_risk">HIGH RISK</string>
+    <string name="risk_dangerous">DANGEROUS</string>
+    <string name="risk_score_format">Risk Score: %1$d / 100</string>
+
+    <!-- Settings & Privacy -->
+    <string name="privacy_title">Privacy &amp; Security</string>
+    <string name="privacy_subtitle">Your content stays on your device.</string>
+    <string name="setting_language_title">App Language</string>
+    <string name="setting_language_subtitle">Change application language anytime</string>
+    <string name="dialog_choose_language">Choose Language</string>
+
+    <!-- Buttons -->
+    <string name="btn_scan_again">Scan Again</string>
+    <string name="btn_done">Done</string>
+    <string name="btn_cancel">Cancel</string>
+</resources>

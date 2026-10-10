@@ -1,0 +1,15 @@
+{
+  "format_version": 1,
+  "model": "Linear SVM",
+  "features": "Word TF-IDF + Character TF-IDF",
+  "word_features": 100000,
+  "character_features": 100000,
+  "total_features": 200000,
+  "decision_threshold": 0.0,
+  "offline": true,
+  "tensorflow_required": false,
+  "test_accuracy": 0.980371,
+  "test_precision": 0.974684,
+  "test_recall": 0.97177,
+  "test_f1": 0.973225
+}

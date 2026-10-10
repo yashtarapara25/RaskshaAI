@@ -1,0 +1,12 @@
+{
+  "source_dataset": "PhishTank verified_online.csv",
+  "original_record_count": 72159,
+  "verified_records_count": 72159,
+  "online_records_count": 72159,
+  "verified_online_records_used": 72159,
+  "duplicate_urls_removed": 4,
+  "unique_phishing_url_count": 72155,
+  "unique_phishing_domain_count": 38310,
+  "processing_date": "2026-10-07 08:29:21",
+  "normalization_description": "Trimmed whitespace, stripped external trailing punctuation, filtered for verified=yes and online=yes, extracted lowercased root hostnames without www prefix, deduplicated preserving entry order."
+}

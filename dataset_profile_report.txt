@@ -1,0 +1,825 @@
+RakshaAI - Dataset Profiling Report
+================================================================================
+
+
+================================================================================
+FILE: scamshield_train.csv
+================================================================================
+Rows:    69,286
+Columns: 17
+
+Columns:
+  - id
+  - text
+  - language
+  - source_dataset
+  - is_scam
+  - scam_category
+  - urgency
+  - fear
+  - authority_impersonation
+  - reward_bait
+  - financial_pressure
+  - has_url
+  - has_phone
+  - has_otp
+  - has_upi
+  - has_amount
+  - split
+
+Data types:
+id                           str
+text                         str
+language                     str
+source_dataset               str
+is_scam                    int64
+scam_category                str
+urgency                    int64
+fear                       int64
+authority_impersonation    int64
+reward_bait                int64
+financial_pressure         int64
+has_url                     bool
+has_phone                   bool
+has_otp                     bool
+has_upi                     bool
+has_amount                  bool
+split                        str
+
+Missing values:
+text    1
+
+Duplicate rows:
+  0
+
+Potential categorical columns:
+
+  language (3 unique values):
+    'English' -> 61,058
+    'Hindi' -> 5,436
+    'Hinglish' -> 2,792
+
+  source_dataset (7 unique values):
+    'Smishing_Dataset' -> 55,475
+    'UCI_SMS_Spam' -> 4,175
+    'Synthetic_Tier_C' -> 3,720
+    'Kaggle_Hindi_Merged' -> 3,652
+    'Indian_Telecom_SMS' -> 1,627
+    'ysangam/Indian_Cyber_Scam_Hinglish' -> 597
+    'Benchmark_Ground_Truth' -> 40
+
+  is_scam (2 unique values):
+    0 -> 44,221
+    1 -> 25,065
+
+  scam_category (12 unique values):
+    'Legitimate / Benign' -> 44,221
+    'General Spam / Telemarketing' -> 19,439
+    'UPI Fraud' -> 1,318
+    'Fake KYC' -> 1,217
+    'Courier Scam' -> 892
+    'Lottery / Prize' -> 733
+    'Loan Scam' -> 368
+    'Electricity Disconnection' -> 314
+    'Telegram Job' -> 311
+    'Bank Account Freeze' -> 207
+    'Traffic e-Challan' -> 187
+    'OTP / Credential Theft' -> 79
+
+  urgency (2 unique values):
+    0 -> 63,850
+    1 -> 5,436
+
+  fear (2 unique values):
+    0 -> 66,507
+    1 -> 2,779
+
+  authority_impersonation (2 unique values):
+    0 -> 66,485
+    1 -> 2,801
+
+  reward_bait (2 unique values):
+    0 -> 61,237
+    1 -> 8,049
+
+  financial_pressure (2 unique values):
+    0 -> 65,208
+    1 -> 4,078
+
+  has_url (2 unique values):
+    False -> 60,877
+    True -> 8,409
+
+  has_phone (2 unique values):
+    False -> 67,127
+    True -> 2,159
+
+  has_otp (2 unique values):
+    False -> 68,463
+    True -> 823
+
+  has_upi (2 unique values):
+    False -> 69,158
+    True -> 128
+
+  has_amount (2 unique values):
+    False -> 64,795
+    True -> 4,491
+
+  split (1 unique values):
+    'train' -> 69,286
+
+Text statistics for 'text':
+  Average length: 99.05
+  Minimum length: 0
+  Maximum length: 2,689
+
+Sample records:
+
+  Row 0:
+    id: real_051067
+    text: Oh so you were late?? I went aye also, dun rmb being stuck in a jamleh! Haha sian I just got this sms! We were asking lkh our test date:P
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 0
+    scam_category: Legitimate / Benign
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: False
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: train
+
+  Row 1:
+    id: real_074028
+    text: ?? Gd night, sleep well!
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 0
+    scam_category: Legitimate / Benign
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: False
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: train
+
+  Row 2:
+    id: real_074336
+    text: It wo n't be long until you receive your Mand order To update your delivery preference click here www.yodel.co.uk/tracking/ JDO0022
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 1
+    scam_category: Courier Scam
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: True
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: train
+
+
+================================================================================
+FILE: scamshield_val.csv
+================================================================================
+Rows:    8,192
+Columns: 17
+
+Columns:
+  - id
+  - text
+  - language
+  - source_dataset
+  - is_scam
+  - scam_category
+  - urgency
+  - fear
+  - authority_impersonation
+  - reward_bait
+  - financial_pressure
+  - has_url
+  - has_phone
+  - has_otp
+  - has_upi
+  - has_amount
+  - split
+
+Data types:
+id                           str
+text                         str
+language                     str
+source_dataset               str
+is_scam                    int64
+scam_category                str
+urgency                    int64
+fear                       int64
+authority_impersonation    int64
+reward_bait                int64
+financial_pressure         int64
+has_url                     bool
+has_phone                   bool
+has_otp                     bool
+has_upi                     bool
+has_amount                  bool
+split                        str
+
+Missing values:
+  None
+
+Duplicate rows:
+  0
+
+Potential categorical columns:
+
+  language (3 unique values):
+    'English' -> 7,631
+    'Hindi' -> 456
+    'Hinglish' -> 105
+
+  source_dataset (6 unique values):
+    'Smishing_Dataset' -> 6,955
+    'UCI_SMS_Spam' -> 514
+    'Kaggle_Hindi_Merged' -> 455
+    'Indian_Telecom_SMS' -> 189
+    'ysangam/Indian_Cyber_Scam_Hinglish' -> 76
+    'Benchmark_Ground_Truth' -> 3
+
+  is_scam (2 unique values):
+    0 -> 5,186
+    1 -> 3,006
+
+  scam_category (12 unique values):
+    'Legitimate / Benign' -> 5,186
+    'General Spam / Telemarketing' -> 2,440
+    'UPI Fraud' -> 141
+    'Fake KYC' -> 137
+    'Courier Scam' -> 82
+    'Lottery / Prize' -> 75
+    'Loan Scam' -> 45
+    'Telegram Job' -> 36
+    'Electricity Disconnection' -> 23
+    'Bank Account Freeze' -> 14
+    'OTP / Credential Theft' -> 12
+    'Traffic e-Challan' -> 1
+
+  urgency (2 unique values):
+    0 -> 7,598
+    1 -> 594
+
+  fear (2 unique values):
+    0 -> 7,925
+    1 -> 267
+
+  authority_impersonation (2 unique values):
+    0 -> 7,930
+    1 -> 262
+
+  reward_bait (2 unique values):
+    0 -> 7,256
+    1 -> 936
+
+  financial_pressure (2 unique values):
+    0 -> 7,736
+    1 -> 456
+
+  has_url (2 unique values):
+    False -> 7,200
+    True -> 992
+
+  has_phone (2 unique values):
+    False -> 8,025
+    True -> 167
+
+  has_otp (2 unique values):
+    False -> 8,169
+    True -> 23
+
+  has_upi (2 unique values):
+    False -> 8,175
+    True -> 17
+
+  has_amount (2 unique values):
+    False -> 7,912
+    True -> 280
+
+  split (1 unique values):
+    'val' -> 8,192
+
+Text statistics for 'text':
+  Average length: 95.72
+  Minimum length: 4
+  Maximum length: 3,092
+
+Sample records:
+
+  Row 0:
+    id: real_024598
+    text: Computational science, dunno anyone there... U muz b in maths rite...
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 0
+    scam_category: Legitimate / Benign
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: False
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: val
+
+  Row 1:
+    id: real_069032
+    text: Still at west coast... Haiz... ??'ll take forever to come back...
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 0
+    scam_category: Legitimate / Benign
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: False
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: val
+
+  Row 2:
+    id: real_051455
+    text: Oh shit.. They will come right? Because I brought lots of things to be put in the fridge..
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 0
+    scam_category: Legitimate / Benign
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: False
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: val
+
+
+================================================================================
+FILE: scamshield_test.csv
+================================================================================
+Rows:    8,202
+Columns: 17
+
+Columns:
+  - id
+  - text
+  - language
+  - source_dataset
+  - is_scam
+  - scam_category
+  - urgency
+  - fear
+  - authority_impersonation
+  - reward_bait
+  - financial_pressure
+  - has_url
+  - has_phone
+  - has_otp
+  - has_upi
+  - has_amount
+  - split
+
+Data types:
+id                           str
+text                         str
+language                     str
+source_dataset               str
+is_scam                    int64
+scam_category                str
+urgency                    int64
+fear                       int64
+authority_impersonation    int64
+reward_bait                int64
+financial_pressure         int64
+has_url                     bool
+has_phone                   bool
+has_otp                     bool
+has_upi                     bool
+has_amount                  bool
+split                        str
+
+Missing values:
+  None
+
+Duplicate rows:
+  0
+
+Potential categorical columns:
+
+  language (3 unique values):
+    'English' -> 7,634
+    'Hindi' -> 460
+    'Hinglish' -> 108
+
+  source_dataset (6 unique values):
+    'Smishing_Dataset' -> 6,988
+    'UCI_SMS_Spam' -> 465
+    'Kaggle_Hindi_Merged' -> 460
+    'Indian_Telecom_SMS' -> 217
+    'ysangam/Indian_Cyber_Scam_Hinglish' -> 70
+    'Benchmark_Ground_Truth' -> 2
+
+  is_scam (2 unique values):
+    0 -> 5,191
+    1 -> 3,011
+
+  scam_category (12 unique values):
+    'Legitimate / Benign' -> 5,191
+    'General Spam / Telemarketing' -> 2,433
+    'UPI Fraud' -> 148
+    'Fake KYC' -> 120
+    'Courier Scam' -> 98
+    'Lottery / Prize' -> 88
+    'Loan Scam' -> 52
+    'Telegram Job' -> 24
+    'Bank Account Freeze' -> 18
+    'Electricity Disconnection' -> 17
+    'OTP / Credential Theft' -> 12
+    'Traffic e-Challan' -> 1
+
+  urgency (2 unique values):
+    0 -> 7,672
+    1 -> 530
+
+  fear (2 unique values):
+    0 -> 7,973
+    1 -> 229
+
+  authority_impersonation (2 unique values):
+    0 -> 7,945
+    1 -> 257
+
+  reward_bait (2 unique values):
+    0 -> 7,217
+    1 -> 985
+
+  financial_pressure (2 unique values):
+    0 -> 7,727
+    1 -> 475
+
+  has_url (2 unique values):
+    False -> 7,198
+    True -> 1,004
+
+  has_phone (2 unique values):
+    False -> 8,045
+    True -> 157
+
+  has_otp (2 unique values):
+    False -> 8,174
+    True -> 28
+
+  has_upi (2 unique values):
+    False -> 8,187
+    True -> 15
+
+  has_amount (2 unique values):
+    False -> 7,936
+    True -> 266
+
+  split (1 unique values):
+    'test' -> 8,202
+
+Text statistics for 'text':
+  Average length: 96.71
+  Minimum length: 4
+  Maximum length: 1,406
+
+Sample records:
+
+  Row 0:
+    id: real_053691
+    text: Haha dunno she woke up them keep telling him to move away and coverblanket until I wake up, then she ask me turn off his com! Haha yeahkeep missing each other but finally caught le right XD haha ooo havefun! I have cp later): haha tmr sat right? Okay! (:
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 0
+    scam_category: Legitimate / Benign
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: False
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: test
+
+  Row 1:
+    id: real_011707
+    text: NavyFederal&oyc10ZZ5:Your account has been locked due to unusual transactions.Unlock it now visit https://upp.edu.pe/nfcu
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 0
+    scam_category: Legitimate / Benign
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: True
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: test
+
+  Row 2:
+    id: real_018157
+    text: Hv u reached?
+    language: English
+    source_dataset: Smishing_Dataset
+    is_scam: 0
+    scam_category: Legitimate / Benign
+    urgency: 0
+    fear: 0
+    authority_impersonation: 0
+    reward_bait: 0
+    financial_pressure: 0
+    has_url: False
+    has_phone: False
+    has_otp: False
+    has_upi: False
+    has_amount: False
+    split: test
+
+
+================================================================================
+FILE: scam_hum_india.csv
+================================================================================
+Rows:    2,272
+Columns: 2
+
+Columns:
+  - text
+  - label
+
+Data types:
+text     str
+label    str
+
+Missing values:
+text    1
+
+Duplicate rows:
+  0
+
+Potential categorical columns:
+
+  label (2 unique values):
+    'ham' -> 1,377
+    'spam' -> 895
+
+Text statistics for 'text':
+  Average length: 105.33
+  Minimum length: 0
+  Maximum length: 743
+
+Sample records:
+
+  Row 0:
+    text: CONGRATULATIONS! FREE 2GB data is yours! Claim on Airtel Thanks App Now. Hurry i.airtel.in/e/csl_ml_2GB
+    label: spam
+
+  Row 1:
+    text: Hi! Thank you for being with Vi-India's FASTEST 4G, Ookla-verified. We'd love to improve ourselves! Click http://bit.ly/3uU8D31 to share your feedback.
+    label: spam
+
+  Row 2:
+    text: As part of Cyber Swachhta Pakhwada, CERT-In GoI advises you to keep your digital devices bot free. Get bot removal tool at https://www.csk.gov.in
+    label: spam
+
+
+================================================================================
+FILE: messages_raw.csv
+================================================================================
+Rows:    5,574
+Columns: 11
+
+Columns:
+  - text
+  - language
+  - category
+  - label
+  - urgency
+  - financial_request
+  - otp_request
+  - url_present
+  - brand_impersonation
+  - social_engineering
+  - risk
+
+Data types:
+text                       str
+language                   str
+category               float64
+label                      str
+urgency                float64
+financial_request      float64
+otp_request            float64
+url_present              int64
+brand_impersonation    float64
+social_engineering     float64
+risk                     int64
+
+Missing values:
+category               5574
+urgency                5574
+financial_request      5574
+otp_request            5574
+brand_impersonation    5574
+social_engineering     5574
+
+Duplicate rows:
+  403
+
+Potential categorical columns:
+
+  language (1 unique values):
+    'English' -> 5,574
+
+  category (0 unique values):
+    nan -> 5,574
+
+  label (2 unique values):
+    'ham' -> 4,827
+    'spam' -> 747
+
+  urgency (0 unique values):
+    nan -> 5,574
+
+  financial_request (0 unique values):
+    nan -> 5,574
+
+  otp_request (0 unique values):
+    nan -> 5,574
+
+  url_present (2 unique values):
+    0 -> 5,420
+    1 -> 154
+
+  brand_impersonation (0 unique values):
+    nan -> 5,574
+
+  social_engineering (0 unique values):
+    nan -> 5,574
+
+  risk (2 unique values):
+    0 -> 4,827
+    1 -> 747
+
+Text statistics for 'text':
+  Average length: 80.48
+  Minimum length: 2
+  Maximum length: 910
+
+Sample records:
+
+  Row 0:
+    text: Go until jurong point, crazy.. Available only in bugis n great world la e buffet... Cine there got amore wat...
+    language: English
+    category: nan
+    label: ham
+    urgency: nan
+    financial_request: nan
+    otp_request: nan
+    url_present: 0
+    brand_impersonation: nan
+    social_engineering: nan
+    risk: 0
+
+  Row 1:
+    text: Ok lar... Joking wif u oni...
+    language: English
+    category: nan
+    label: ham
+    urgency: nan
+    financial_request: nan
+    otp_request: nan
+    url_present: 0
+    brand_impersonation: nan
+    social_engineering: nan
+    risk: 0
+
+  Row 2:
+    text: Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&C's apply 08452810075over18's
+    language: English
+    category: nan
+    label: spam
+    urgency: nan
+    financial_request: nan
+    otp_request: nan
+    url_present: 0
+    brand_impersonation: nan
+    social_engineering: nan
+    risk: 1
+
+
+================================================================================
+FILE: verified_online.csv
+================================================================================
+Rows:    72,159
+Columns: 8
+
+Columns:
+  - phish_id
+  - url
+  - phish_detail_url
+  - submission_time
+  - verified
+  - verification_time
+  - online
+  - target
+
+Data types:
+phish_id             int64
+url                    str
+phish_detail_url       str
+submission_time        str
+verified               str
+verification_time      str
+online                 str
+target                 str
+
+Missing values:
+  None
+
+Duplicate rows:
+  0
+
+Potential categorical columns:
+
+  verified (1 unique values):
+    'yes' -> 72,159
+
+  online (1 unique values):
+    'yes' -> 72,159
+
+Text statistics for 'url':
+  Average length: 56.49
+  Minimum length: 12
+  Maximum length: 25,523
+
+Sample records:
+
+  Row 0:
+    phish_id: 9537833
+    url: https://allegrolokalnie.lokalna-6747.sbs
+    phish_detail_url: http://www.phishtank.com/phish_detail.php?phish_id=9537833
+    submission_time: 2026-10-04T10:35:08+00:00
+    verified: yes
+    verification_time: 2026-10-04T10:41:23+00:00
+    online: yes
+    target: Allegro
+
+  Row 1:
+    phish_id: 9537832
+    url: http://allegro.0132919hpho5i.skin/
+    phish_detail_url: http://www.phishtank.com/phish_detail.php?phish_id=9537832
+    submission_time: 2026-10-04T10:33:17+00:00
+    verified: yes
+    verification_time: 2026-10-04T10:41:23+00:00
+    online: yes
+    target: Allegro
+
+  Row 2:
+    phish_id: 9537831
+    url: https://silmevorn.cfd/pages/#/index
+    phish_detail_url: http://www.phishtank.com/phish_detail.php?phish_id=9537831
+    submission_time: 2026-10-04T10:18:57+00:00
+    verified: yes
+    verification_time: 2026-10-04T10:31:41+00:00
+    online: yes
+    target: Other

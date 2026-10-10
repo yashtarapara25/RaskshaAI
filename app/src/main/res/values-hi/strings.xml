@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">रक्षाAI</string>
+    <string name="app_tagline">गोपनीयता-प्रथम साइबर सुरक्षा</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">होम</string>
+    <string name="nav_scan">स्कैन</string>
+    <string name="nav_history">इतिहास</string>
+    <string name="nav_privacy">गोपनीयता</string>
+
+    <!-- Home Dashboard -->
+    <string name="dashboard_hero_title">क्लिक करने से पहले जांचें</string>
+    <string name="dashboard_hero_subtitle">संदिग्ध संदेशों, लिंक और तस्वीरों को अपने डिवाइस पर निजी तौर पर स्कैन करें।</string>
+    <string name="dashboard_action_header">आप क्या जांचना चाहते हैं?</string>
+    <string name="option_message_title">संदेश</string>
+    <string name="option_message_desc">संदिग्ध टेक्स्ट स्कैन करें</string>
+    <string name="option_link_title">लिंक</string>
+    <string name="option_link_desc">संदिग्ध लिंक जांचें</string>
+    <string name="option_screenshot_title">स्क्रीनशॉट</string>
+    <string name="option_screenshot_desc">स्क्रीनशॉट टेक्स्ट जांचें</string>
+    <string name="option_voice_title">आवाज / फोटो</string>
+    <string name="option_voice_desc">फोटो या आवाज से टेक्स्ट जांचें</string>
+
+    <!-- Offline Status -->
+    <string name="offline_badge">ऑफलाइन सुरक्षा सक्रिय</string>
+    <string name="offline_mode_title">ऑफलाइन मोड</string>
+    <string name="offline_check_1">स्थानीय विश्लेषण सक्रिय</string>
+    <string name="offline_check_2">कोई सामग्री अपलोड नहीं होती</string>
+    <string name="offline_check_3">इंटरनेट की आवश्यकता नहीं है</string>
+
+    <!-- Scan Screen -->
+    <string name="scan_title">सामग्री स्कैन करें</string>
+    <string name="scan_subtitle">चुनें कि आप क्या जांचना चाहते हैं।</string>
+    <string name="scan_tab_message">संदेश</string>
+    <string name="scan_tab_link">लिंक</string>
+    <string name="scan_tab_screenshot">स्क्रीनशॉट</string>
+    <string name="scan_tab_voice">आवाज/फोटो</string>
+    <string name="scan_placeholder_message">यहां SMS या WhatsApp संदेश पेस्ट करें</string>
+    <string name="scan_placeholder_link">https://example.com</string>
+    <string name="scan_placeholder_screenshot">स्क्रीनशॉट से टेक्स्ट यहां दिखाई देगा...</string>
+    <string name="scan_placeholder_photo">फोटो से टेक्स्ट यहां दिखाई देगा...</string>
+    <string name="btn_paste">पेस्ट करें</string>
+    <string name="btn_clear">साफ करें</string>
+    <string name="btn_choose_screenshot">स्क्रीनशॉट चुनें</string>
+    <string name="btn_take_photo">फोटो खींचें</string>
+    <string name="btn_analyze_offline">संदेश जांचें</string>
+
+    <!-- Result Screen Section Headers -->
+    <string name="result_title">जोखिम परिणाम</string>
+    <string name="section_risk_status">जोखिम स्थिति</string>
+    <string name="section_what_we_found">हमें क्या मिला</string>
+    <string name="section_why_is_this_risky">यह जोखिम भरा क्यों है?</string>
+    <string name="section_warning_signs">चेतावनी संकेत</string>
+    <string name="section_what_should_you_do">आपको क्या करना चाहिए?</string>
+    <string name="section_how_to_avoid_this">सुरक्षित कैसे रहें</string>
+
+    <!-- Risk Levels -->
+    <string name="risk_safe">सुरक्षित</string>
+    <string name="risk_suspicious">संदिग्ध</string>
+    <string name="risk_high_risk">उच्च जोखिम</string>
+    <string name="risk_dangerous">खतरनाक</string>
+    <string name="risk_score_format">जोखिम स्कोर: %1$d / 100</string>
+
+    <!-- Settings & Privacy -->
+    <string name="privacy_title">गोपनीयता और सुरक्षा</string>
+    <string name="privacy_subtitle">आपकी सामग्री आपके फोन पर ही रहती है।</string>
+    <string name="setting_language_title">ऐप भाषा</string>
+    <string name="setting_language_subtitle">कभी भी ऐप की भाषा बदलें</string>
+    <string name="dialog_choose_language">भाषा चुनें</string>
+
+    <!-- Buttons -->
+    <string name="btn_scan_again">फिर से स्कैन करें</string>
+    <string name="btn_done">हो गया</string>
+    <string name="btn_cancel">रद्द करें</string>
+</resources>
